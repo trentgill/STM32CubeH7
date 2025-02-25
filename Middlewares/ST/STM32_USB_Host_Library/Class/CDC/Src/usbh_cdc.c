@@ -156,7 +156,8 @@ static USBH_StatusTypeDef USBH_CDC_InterfaceInit(USBH_HandleTypeDef *phost)
   CDC_HandleTypeDef *CDC_Handle;
 
   interface = USBH_FindInterface(phost, COMMUNICATION_INTERFACE_CLASS_CODE,
-                                   ABSTRACT_CONTROL_MODEL, COMMON_AT_COMMAND);
+                                   ABSTRACT_CONTROL_MODEL, NO_CLASS_SPECIFIC_PROTOCOL_CODE);
+                                   // ABSTRACT_CONTROL_MODEL, COMMON_AT_COMMAND);
 
   if ((interface == 0xFFU) || (interface >= USBH_MAX_NUM_INTERFACES)) /* No Valid Interface */
   {

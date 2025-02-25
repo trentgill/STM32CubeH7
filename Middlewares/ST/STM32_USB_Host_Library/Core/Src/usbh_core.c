@@ -838,13 +838,14 @@ USBH_StatusTypeDef USBH_Process(USBH_HandleTypeDef *phost)
   return USBH_OK;
 }
 
-
 /**
   * @brief  USBH_HandleEnum
   *         This function includes the complete enumeration process
   * @param  phost: Host Handle
   * @retval USBH_Status
   */
+static char _mfgstring[64] = "undefined";
+static char _productstring[64] = "undefined";
 static USBH_StatusTypeDef USBH_HandleEnum(USBH_HandleTypeDef *phost)
 {
   USBH_StatusTypeDef Status = USBH_BUSY;
@@ -1049,6 +1050,7 @@ static USBH_StatusTypeDef USBH_HandleEnum(USBH_HandleTypeDef *phost)
         {
           /* User callback for Manufacturing string */
           USBH_UsrLog("Manufacturer : %s", (char *)(void *)phost->device.Data);
+          strcpy(_mfgstring, (char*)(void*)phost->device.Data);
           phost->EnumState = ENUM_GET_PRODUCT_STRING_DESC;
 
 #if (USBH_USE_OS == 1U)
@@ -1063,6 +1065,7 @@ static USBH_StatusTypeDef USBH_HandleEnum(USBH_HandleTypeDef *phost)
         else if (ReqStatus == USBH_NOT_SUPPORTED)
         {
           USBH_UsrLog("Manufacturer : N/A");
+          strcpy(_mfgstring, "not supported");
           phost->EnumState = ENUM_GET_PRODUCT_STRING_DESC;
 
 #if (USBH_USE_OS == 1U)
@@ -1081,6 +1084,7 @@ static USBH_StatusTypeDef USBH_HandleEnum(USBH_HandleTypeDef *phost)
       }
       else
       {
+        strcpy(_mfgstring, "query failed");
         USBH_UsrLog("Manufacturer : N/A");
         phost->EnumState = ENUM_GET_PRODUCT_STRING_DESC;
 
@@ -1105,11 +1109,13 @@ static USBH_StatusTypeDef USBH_HandleEnum(USBH_HandleTypeDef *phost)
         {
           /* User callback for Product string */
           USBH_UsrLog("Product : %s", (char *)(void *)phost->device.Data);
+          strcpy(_productstring, (char*)(void*)phost->device.Data);
           phost->EnumState = ENUM_GET_SERIALNUM_STRING_DESC;
         }
         else if (ReqStatus == USBH_NOT_SUPPORTED)
         {
           USBH_UsrLog("Product : N/A");
+          strcpy(_productstring, "not supported");
           phost->EnumState = ENUM_GET_SERIALNUM_STRING_DESC;
 
 #if (USBH_USE_OS == 1U)
@@ -1129,6 +1135,7 @@ static USBH_StatusTypeDef USBH_HandleEnum(USBH_HandleTypeDef *phost)
       else
       {
         USBH_UsrLog("Product : N/A");
+        strcpy(_productstring, "query failed");
         phost->EnumState = ENUM_GET_SERIALNUM_STRING_DESC;
 
 #if (USBH_USE_OS == 1U)
@@ -1175,6 +1182,15 @@ static USBH_StatusTypeDef USBH_HandleEnum(USBH_HandleTypeDef *phost)
       break;
   }
   return Status;
+}
+
+
+char* USBH_GetMfgString(void){
+  return _mfgstring;
+}
+
+char* USBH_GetProductString(void){
+  return _productstring;
 }
 
 

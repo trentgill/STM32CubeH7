@@ -164,6 +164,16 @@ void USBH_LL_IncTimer(USBH_HandleTypeDef *phost);
 
 void USBH_Delay(uint32_t Delay);
 
+
+////// additional enumeration helpers
+
+char* USBH_GetMfgString(void);
+char* USBH_GetProductString(void);
+
+
+
+
+
 /**
   * @}
   */
