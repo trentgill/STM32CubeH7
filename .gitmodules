@@ -196,5 +196,5 @@
 	branch = master
 [submodule "Middlewares/ST/STM32_USB_Host_Library"]
 	path = Middlewares/ST/STM32_USB_Host_Library
-	url = https://github.com/STMicroelectronics/stm32-mw-usb-host
+	url = git@github.com:trentgill/stm32-mw-usb-host.git
 	branch = master
