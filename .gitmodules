@@ -4,13 +4,13 @@
 	branch = master
 [submodule "Drivers/STM32H7xx_HAL_Driver"]
 	path = Drivers/STM32H7xx_HAL_Driver
-	url = git@github.com:trentgill/stm32h7xx-hal-driver.git
+	url = https://github.com/trentgill/stm32h7xx-hal-driver.git
 	branch = master
 [submodule "Middlewares/ST/STM32_USB_Device_Library"]
 	path = Middlewares/ST/STM32_USB_Device_Library
-	url = git@github.com:trentgill/stm32-mw-usb-device.git
+	url = https://github.com/trentgill/stm32-mw-usb-device.git
 	branch = master
 [submodule "Middlewares/ST/STM32_USB_Host_Library"]
 	path = Middlewares/ST/STM32_USB_Host_Library
-	url = git@github.com:trentgill/stm32-mw-usb-host.git
+	url = https://github.com/trentgill/stm32-mw-usb-host.git
 	branch = master
